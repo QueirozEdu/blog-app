@@ -1,0 +1,20 @@
+{
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+
+    "editor.codeActionsOnSave": {"source.fixAll.eslint": "explicit"},
+    "workbench.editor.labelFormat": "short",
+    
+    "[javascript]":{
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]":{
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[xml]":{
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+
+    "explorer.compactFolders": false
+
+}
