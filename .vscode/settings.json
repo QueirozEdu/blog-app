@@ -4,7 +4,7 @@
 
     "editor.codeActionsOnSave": {"source.fixAll.eslint": "explicit"},
     "workbench.editor.labelFormat": "short",
-    
+
     "[javascript]":{
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
@@ -15,6 +15,12 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
 
-    "explorer.compactFolders": false
+    "explorer.compactFolders": false,
 
+    "code-runner.clearPreviousOutput": false,
+    "code-runner.runInTerminal": true,
+    "code-runner.ignoreSelection": true,
+    "code-runner.executorMap": {
+        "typescript": "clear ; npx tsx",
+    }
 }
