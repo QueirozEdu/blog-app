@@ -6,6 +6,7 @@ import { postRepository } from "@/repositories/post";
 import Link from "next/link";
 import Image from "next/image";
 import { Suspense } from "react";
+import { PostHeading } from "@/components/PostHeadingindex";
 
 export default async function HomePage() {
     return (
@@ -33,13 +34,16 @@ export default async function HomePage() {
                     >
                         30/07/2025 09:41
                     </time>
-                    <h1 className="text-2xl/tight font-extrabold sm:text-4xl">
-                        <Link href="#">Lorem ipsum dolor sit amet.</Link>
-                    </h1>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nesciunt harum atque minima nostrum temporibus repudiandae
-                    quasi quibusdam culpa laudantium, at incidunt nihil
-                    accusamus rem dolores enim, libero magni id impedit?
+                    <PostHeading as="h2" url="#">
+                        quibusdam culpa laudantium, at incidunt nihil ac
+                    </PostHeading>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Nesciunt harum atque minima nostrum temporibus
+                        repudiandae quasi quibusdam culpa laudantium, at
+                        incidunt nihil accusamus rem dolores enim, libero magni
+                        id impedit?
+                    </p>
                 </div>
             </section>
             <Suspense fallback={<SpinLoader />}>
