@@ -13,7 +13,7 @@ export async function PostsList() {
                     <div className="flex flex-col gap-4 group" key={post.id}>
                         <PostCoverImage
                             linkProps={{
-                                href: `/post/${post.slug}`,
+                                href: postLink,
                             }}
                             imageProps={{
                                 width: 1200,
@@ -31,7 +31,7 @@ export async function PostsList() {
                                 {post.createdAt}
                             </time>
 
-                            <PostHeading as="h2" url="#">
+                            <PostHeading as="h2" url={postLink}>
                                 {post.title}
                             </PostHeading>
 
