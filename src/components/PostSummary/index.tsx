@@ -1,22 +1,36 @@
-import { formatDistanceToNow } from "date-fns/formatDistanceToNow";
+import { formatDateTime, formatDistanceToNow } from "@/utils/format-datetime";
 import { PostHeading } from "../PostHeading";
 
-export function PostSumary() {
+type PostSumaryProps = {
+    postHeading: "h1" | "h2";
+    postLink: string;
+    createdAt: string;
+    title: string;
+    excerpt: string;
+};
+
+export function PostSumary({
+    postHeading,
+    postLink,
+    createdAt,
+    title,
+    excerpt,
+}: PostSumaryProps) {
     return (
         <div className="flex flex-col gap-4 sm:justify-center">
             <time
                 className="text-slate-600 block text-sm/tight"
-                dateTime={post.createdAt}
-                title={formatDateTime(post.createdAt)}
+                dateTime={createdAt}
+                title={formatDateTime(createdAt)}
             >
-                {formatDistanceToNow(post.createdAt)}
+                {formatDistanceToNow(createdAt)}
             </time>
 
-            <PostHeading as="h2" url={postLink}>
-                {post.title}
+            <PostHeading as={postHeading} url={postLink}>
+                {title}
             </PostHeading>
 
-            <p>{post.excerpt}</p>
+            <p>{excerpt}</p>
         </div>
     );
 }

@@ -1,5 +1,6 @@
 import { PostCoverImage } from "../PostCoverImage";
 import { PostHeading } from "../PostHeading";
+import { PostSumary } from "../PostSummary";
 
 export function PostFeatured() {
     const slug = "something";
@@ -18,26 +19,13 @@ export function PostFeatured() {
                     priority: true,
                 }}
             />
-
-            <div className="flex flex-col gap-4 sm:justify-center">
-                <time
-                    className="text-slate-600 block text-sm/tight"
-                    dateTime="2025/07/30"
-                >
-                    30/07/2025 09:41
-                </time>
-
-                <PostHeading as="h1" url={postLink}>
-                    Quibusdam culpa laudantium, at incidunt nihil ac
-                </PostHeading>
-
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nesciunt harum atque minima nostrum temporibus repudiandae
-                    quasi quibusdam culpa laudantium, at incidunt nihil
-                    accusamus rem dolores enim, libero magni id impedit?
-                </p>
-            </div>
+            <PostSumary
+                postHeading="h1"
+                postLink={postLink}
+                createdAt={"2025-04-06T00:24:38.616Z"}
+                title="Como a escrita pode mudar sua carreira"
+                excerpt="Muitas empresas e desenvolvedores individuais escolhem o Next.js justamente porque ele consegue unir simplicidade com recursos avançados."
+            />
         </section>
     );
 }
