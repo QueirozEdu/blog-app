@@ -1,6 +1,6 @@
 import { postRepository } from "@/repositories/post";
 import { PostCoverImage } from "../PostCoverImage";
-import { PostHeading } from "../PostHeadingindex";
+import { PostHeading } from "../PostHeading";
 import { formatDateTime, formatDistanceToNow } from "@/utils/format-datetime";
 
 export async function PostsList() {

@@ -1,5 +1,5 @@
 import { PostCoverImage } from "../PostCoverImage";
-import { PostHeading } from "../PostHeadingindex";
+import { PostHeading } from "../PostHeading";
 
 export function PostFeatured() {
     const slug = "something";
