@@ -1,7 +1,7 @@
 import { formatDateTime, formatDistanceToNow } from "@/utils/format-datetime";
 import { PostHeading } from "../PostHeading";
 
-type PostSumaryProps = {
+type PostSummaryProps = {
     postHeading: "h1" | "h2";
     postLink: string;
     createdAt: string;
@@ -9,13 +9,13 @@ type PostSumaryProps = {
     excerpt: string;
 };
 
-export function PostSumary({
+export function PostSummary({
     postHeading,
     postLink,
     createdAt,
     title,
     excerpt,
-}: PostSumaryProps) {
+}: PostSummaryProps) {
     return (
         <div className="flex flex-col gap-4 sm:justify-center">
             <time
