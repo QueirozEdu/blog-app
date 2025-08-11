@@ -1,32 +1,34 @@
-import { findAllPublicPostsCached } from "@/lib/post/queries";
 import { PostCoverImage } from "../PostCoverImage";
-import { PostSumary } from "../PostSummary";
+import { PostSummary } from "../PostSummary";
+import { findAllPublicPostsCached } from "@/lib/post/queries";
 
 export async function PostFeatured() {
     const posts = await findAllPublicPostsCached();
+    const post = posts[0];
 
-    const slug = "something";
-    const postLink = `/post/${slug}`;
+    const postLink = `/post/${post.slug}`;
+
     return (
         <section className="grid grid-cols-1 gap-8 mb-16 sm:grid-cols-2 group">
             <PostCoverImage
                 linkProps={{
-                    href: "/post/asdfasdf",
+                    href: postLink,
                 }}
                 imageProps={{
                     width: 1200,
                     height: 720,
-                    src: "/images/bryen_9.png",
-                    alt: "Image alt",
+                    src: post.coverImageUrl,
+                    alt: post.title,
                     priority: true,
                 }}
             />
-            <PostSumary
-                postHeading="h1"
+
+            <PostSummary
                 postLink={postLink}
-                createdAt={"2025-04-06T00:24:38.616Z"}
-                title="Como a escrita pode mudar sua carreira"
-                excerpt="Muitas empresas e desenvolvedores individuais escolhem o Next.js justamente porque ele consegue unir simplicidade com recursos avançados."
+                postHeading="h1"
+                createdAt={post.createdAt}
+                excerpt={post.excerpt}
+                title={post.title}
             />
         </section>
     );
