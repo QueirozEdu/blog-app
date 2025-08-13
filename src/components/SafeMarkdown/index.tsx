@@ -43,7 +43,6 @@ export function SafeMarkdown({ markdown }: SafeMarkdownProps) {
             >
                 {markdown}
             </ReactMarkdown>
-            ;
         </div>
     );
 }
