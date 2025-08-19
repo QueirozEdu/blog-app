@@ -28,8 +28,3 @@ export function formatHour(timestampMs: number): string {
         locale: ptBR,
     });
 }
-
-const rawDate = "2025-08-06T00:06:35.545Z";
-console.log(rawDate);
-console.log(formatDateTime(rawDate));
-console.log(formatDistanceToNow(rawDate));
