@@ -3,6 +3,7 @@ import Image from "next/image";
 import { PostHeading } from "../PostHeading";
 import { PostDate } from "../PostDate";
 import { SafeMarkdown } from "../SafeMarkdown";
+import { logColor } from "@/utils/log-color";
 
 type SinglePostProps = {
     slug: string;
@@ -10,6 +11,7 @@ type SinglePostProps = {
 
 export async function SinglePost({ slug }: SinglePostProps) {
     const post = await findPublicPostBySlugCached(slug);
+    console.log(post);
 
     return (
         <article className="mb-16">
@@ -21,6 +23,7 @@ export async function SinglePost({ slug }: SinglePostProps) {
                     height={720}
                     alt={post.title}
                 />
+
                 <PostHeading url={`/post/${post.slug}`}>
                     {post.title}
                 </PostHeading>
@@ -30,7 +33,7 @@ export async function SinglePost({ slug }: SinglePostProps) {
                 </p>
             </header>
 
-            <p className="text-xl text-slate-600 mb-4">{post.excerpt}</p>
+            <p className="text-xl mb-4 text-slate-600">{post.excerpt}</p>
 
             <SafeMarkdown markdown={post.content} />
         </article>
