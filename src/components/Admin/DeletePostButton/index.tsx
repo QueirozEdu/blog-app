@@ -17,11 +17,14 @@ export function DeletePostButton({ id, title }: DeletePostButtonProps) {
 
     function handleClick() {
         setShowDialog(true);
-        //     if (!confirm("Are you sure? ")) return;
-        //     startTransition(async () => {
-        //         const result = await deletePostAction(id);
-        //         alert(`The result is ${result}`);
-        //     });
+    }
+
+    function handleConfirm() {
+        startTransition(async () => {
+            const result = await deletePostAction(id);
+            alert(`The result is ${result}`);
+            setShowDialog(false);
+        });
     }
     return (
         <>
@@ -44,6 +47,9 @@ export function DeletePostButton({ id, title }: DeletePostButtonProps) {
                     isVisible={showDialog}
                     title="Delete post?"
                     content={`Are you sure you want to delete ${title}?`}
+                    onCancel={() => setShowDialog(false)}
+                    onConfirm={handleConfirm}
+                    disabled={isPending}
                 />
             )}
         </>
