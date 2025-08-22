@@ -19,13 +19,20 @@ export function Dialog({
     disabled = false,
 }: DialogProps) {
     if (!isVisible) return null;
+
+    function handleCancel() {
+        if (disabled) return;
+
+        onCancel();
+    }
+
     return (
         <div
             className={clsx(
                 "fixed z-50 inset-0 bg-black/50 backdrop-blur-xs",
                 "flex items-center justify-center"
             )}
-            onClick={onCancel}
+            onClick={handleCancel}
         >
             <div
                 className={clsx(
@@ -52,7 +59,7 @@ export function Dialog({
                             "disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed"
                         )}
                         autoFocus
-                        onClick={onCancel}
+                        onClick={handleCancel}
                         disabled={disabled}
                     >
                         Cancel
