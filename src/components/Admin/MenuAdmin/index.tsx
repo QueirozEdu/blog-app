@@ -1,12 +1,24 @@
 "use client";
 
 import clsx from "clsx";
-import { CircleXIcon, FileTextIcon, HouseIcon, MenuIcon } from "lucide-react";
+import {
+    CircleXIcon,
+    FileTextIcon,
+    HouseIcon,
+    MenuIcon,
+    PlusIcon,
+} from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export function MenuAdmin() {
     const [isOpen, setIsOpen] = useState(false);
+    const pathName = usePathname();
+
+    useEffect(() => {
+        setIsOpen(false);
+    }, [pathName]);
 
     const navClasses = clsx(
         "bg-slate-900 text-slate-100 rounded-lg",
@@ -48,42 +60,18 @@ export function MenuAdmin() {
                     </>
                 )}
             </button>
+
             <a className={linkClasses} href="/" target="_blank">
                 <HouseIcon />
                 Home
             </a>
-
             <Link className={linkClasses} href="/admin/post">
                 <FileTextIcon />
                 Posts
             </Link>
-            <Link className={linkClasses} href="/admin/post">
-                <FileTextIcon />
-                Posts
-            </Link>
-            <Link className={linkClasses} href="/admin/post">
-                <FileTextIcon />
-                Posts
-            </Link>
-            <Link className={linkClasses} href="/admin/post">
-                <FileTextIcon />
-                Posts
-            </Link>
-            <Link className={linkClasses} href="/admin/post">
-                <FileTextIcon />
-                Posts
-            </Link>
-            <Link className={linkClasses} href="/admin/post">
-                <FileTextIcon />
-                Posts
-            </Link>
-            <Link className={linkClasses} href="/admin/post">
-                <FileTextIcon />
-                Posts
-            </Link>
-            <Link className={linkClasses} href="/admin/post">
-                <FileTextIcon />
-                Posts
+            <Link className={linkClasses} href="/admin/post/new">
+                <PlusIcon />
+                Create new post
             </Link>
         </nav>
     );
