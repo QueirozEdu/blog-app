@@ -1,3 +1,4 @@
+import { InputCheckBox } from "@/components/InputCheckbox";
 import { InputText } from "@/components/InputText";
 
 export const dynamic = "force-dynamic";
@@ -24,6 +25,7 @@ export default async function AdminPostNewPage() {
                 defaultValue="This is a default value"
                 readOnly
             />
+            <InputCheckBox labelText="Checkbox" />
         </div>
     );
 }
