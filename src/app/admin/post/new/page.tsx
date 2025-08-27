@@ -1,31 +1,12 @@
-import { InputCheckBox } from "@/components/InputCheckbox";
-import { InputText } from "@/components/InputText";
+import { ManagePostForm } from "@/components/admin/ManagePostForm";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminPostNewPage() {
     return (
-        <div className="flex flex-col gap-6">
-            <InputText labelText="Name" placeholder="Enter your name" />
-            <InputText labelText="Lastname" placeholder="Enter your lastname" />
-            <InputText
-                disabled
-                labelText="Place Holder"
-                placeholder="This is a place holder"
-            />
-            <InputText
-                disabled
-                labelText="Default Value"
-                placeholder="This is a place holder"
-                defaultValue="This is a default value"
-            />
-            <InputText
-                labelText="Read only"
-                placeholder="This is a place holder"
-                defaultValue="This is a default value"
-                readOnly
-            />
-            <InputCheckBox labelText="Checkbox" />
-        </div>
+        <>
+            <h1>Edit post</h1>
+            <ManagePostForm />
+        </>
     );
 }
