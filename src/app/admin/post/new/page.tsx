@@ -1,39 +1,29 @@
-import { Button } from "@/components/Button";
-import { BugIcon } from "lucide-react";
+import { InputText } from "@/components/InputText";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminPostNewPage() {
     return (
-        <div>
-            <div className="py-16 flex gap-4 flex-wrap items-center">
-                <Button variant="default" size="sm">
-                    <BugIcon />
-                    Confirm
-                </Button>
-                <Button variant="ghost" size="md">
-                    <BugIcon />
-                    Confirm
-                </Button>
-                <Button variant="danger" size="lg">
-                    <BugIcon />
-                    Confirm
-                </Button>
-            </div>
-            <div className="py-16 flex gap-4 flex-wrap items-center">
-                <Button variant="default" size="sm" disabled>
-                    <BugIcon />
-                    Confirm
-                </Button>
-                <Button variant="ghost" size="md" disabled>
-                    <BugIcon />
-                    Confirm
-                </Button>
-                <Button variant="danger" size="lg" disabled>
-                    <BugIcon />
-                    Confirm
-                </Button>
-            </div>
+        <div className="flex flex-col gap-6">
+            <InputText labelText="Name" placeholder="Enter your name" />
+            <InputText labelText="Lastname" placeholder="Enter your lastname" />
+            <InputText
+                disabled
+                labelText="Place Holder"
+                placeholder="This is a place holder"
+            />
+            <InputText
+                disabled
+                labelText="Default Value"
+                placeholder="This is a place holder"
+                defaultValue="This is a default value"
+            />
+            <InputText
+                labelText="Read only"
+                placeholder="This is a place holder"
+                defaultValue="This is a default value"
+                readOnly
+            />
         </div>
     );
 }
