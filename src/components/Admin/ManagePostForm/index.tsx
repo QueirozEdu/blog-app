@@ -7,7 +7,7 @@ import { MarkdownEditor } from "@/components/MarkdownEditor";
 import { useState } from "react";
 
 export function ManagePostForm() {
-    const [contentValue, setContentValue] = useState("This is an **example**");
+    const [contentValue, setContentValue] = useState("");
     return (
         <form action="" className="mb-16">
             <div className="flex flex-col gap-6">
