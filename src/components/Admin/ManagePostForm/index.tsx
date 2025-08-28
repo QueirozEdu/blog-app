@@ -5,6 +5,7 @@ import { InputCheckBox } from "@/components/InputCheckbox";
 import { InputText } from "@/components/InputText";
 import { MarkdownEditor } from "@/components/MarkdownEditor";
 import { useState } from "react";
+import { ImageUploder } from "../ImageUploader";
 
 export function ManagePostForm() {
     const [contentValue, setContentValue] = useState("");
@@ -22,6 +23,7 @@ export function ManagePostForm() {
                     labelText="Place Holder"
                     placeholder="This is a place holder"
                 />
+                <ImageUploder />
                 <InputText
                     disabled
                     labelText="Default Value"
