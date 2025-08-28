@@ -3,8 +3,11 @@
 import { Button } from "@/components/Button";
 import { InputCheckBox } from "@/components/InputCheckbox";
 import { InputText } from "@/components/InputText";
+import { MarkdownEditor } from "@/components/MarkdownEditor";
+import { useState } from "react";
 
 export function ManagePostForm() {
+    const [contentValue, setContentValue] = useState("This is an **example**");
     return (
         <form action="" className="mb-16">
             <div className="flex flex-col gap-6">
@@ -13,6 +16,7 @@ export function ManagePostForm() {
                     labelText="Lastname"
                     placeholder="Enter your lastname"
                 />
+
                 <InputText
                     disabled
                     labelText="Place Holder"
@@ -31,6 +35,14 @@ export function ManagePostForm() {
                     readOnly
                 />
                 <InputCheckBox labelText="Checkbox" />
+
+                <MarkdownEditor
+                    labelText="content"
+                    disabled={false}
+                    textAreaName="content"
+                    value={contentValue}
+                    setValue={setContentValue}
+                ></MarkdownEditor>
 
                 <div className="mt-4">
                     <Button type="submit">Send</Button>
