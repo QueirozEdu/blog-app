@@ -69,6 +69,7 @@ export function ImageUploder() {
                 onClick={handleChooseFile}
                 type="button"
                 className="self-start"
+                disabled={isUploading}
             >
                 <ImageUpIcon />
                 Send an image
@@ -90,6 +91,7 @@ export function ImageUploder() {
                 name="file"
                 type="file"
                 accept="image/*"
+                disabled={isUploading}
             />
         </div>
     );
