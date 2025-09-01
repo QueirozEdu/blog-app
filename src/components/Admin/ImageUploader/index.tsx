@@ -7,7 +7,7 @@ import { ImageUpIcon } from "lucide-react";
 import { useRef, useState, useTransition } from "react";
 import { toast } from "react-toastify";
 
-export function ImageUploder() {
+export function ImageUploader() {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [isUploading, startTransition] = useTransition();
     const [imgUrl, setImgUrl] = useState("");
