@@ -1,11 +1,15 @@
 "use server";
 
+import { drizzleDb } from "@/db/drizzle";
+import { postsTable } from "@/db/drizzle/schemas";
 import { makePartialPublicPost, PublicPost } from "@/DTO/post/dto";
 import { PostCreateSchema } from "@/lib/post/validations";
 import { PostModel } from "@/models/post/post-model";
 import { getZodErrorMessages } from "@/utils/get-zod-error-messages";
 import { makeSlugFromText } from "@/utils/make-slug-from-text";
-import slugify from "slugify";
+import { revalidateTag } from "next/cache";
+import { redirect } from "next/navigation";
+import { toast } from "react-toastify";
 import { v4 as uuidV4 } from "uuid";
 
 type CreatePostActionState = {
@@ -46,8 +50,11 @@ export async function createPostAction(
         slug: makeSlugFromText(validPostData.title),
     };
 
-    return {
-        formState: newPost,
-        errors: [],
-    };
+    //TODO move this method to repository
+    await drizzleDb.insert(postsTable).values(newPost);
+
+    revalidateTag("posts");
+    toast.dismiss();
+    toast.success("Post created!");
+    redirect(`/admin/post/${newPost.id}`);
 }
