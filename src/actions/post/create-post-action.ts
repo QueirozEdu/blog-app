@@ -8,13 +8,12 @@ import { getZodErrorMessages } from "@/utils/get-zod-error-messages";
 import { makeSlugFromText } from "@/utils/make-slug-from-text";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
-import { toast } from "react-toastify";
 import { v4 as uuidV4 } from "uuid";
 
 type CreatePostActionState = {
     formState: PublicPost;
     errors: string[];
-    success?: true;
+    success?: string;
 };
 
 export async function createPostAction(
@@ -67,7 +66,5 @@ export async function createPostAction(
     }
 
     revalidateTag("posts");
-    toast.dismiss();
-    toast.success("Post created!");
-    redirect(`/admin/post/${newPost.id}`);
+    redirect(`/admin/post/${newPost.id}?created=1`);
 }
