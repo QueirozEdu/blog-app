@@ -9,18 +9,39 @@ import { ImageUploader } from "../ImageUploader";
 import { makePartialPublicPost, PublicPost } from "@/DTO/post/dto";
 import { createPostAction } from "@/actions/post/create-post-action";
 import { toast } from "react-toastify";
+import { updatePostAction } from "@/actions/post/update-post-action";
 
-type ManagePostFormProps = {
+type ManagePostFormUpdateProps = {
+    mode: "update";
     publicPost?: PublicPost;
 };
 
-export function ManagePostForm({ publicPost }: ManagePostFormProps) {
+type ManagePostFormCreateProps = {
+    mode: "create";
+};
+type ManagePostFormProps =
+    | ManagePostFormUpdateProps
+    | ManagePostFormCreateProps;
+
+export function ManagePostForm(props: ManagePostFormProps) {
+    const { mode } = props;
+
+    let publicPost;
+    if (mode === "update") {
+        publicPost = props.publicPost;
+    }
+
+    const actionsMap = {
+        update: updatePostAction,
+        create: createPostAction,
+    };
+
     const initialState = {
         formState: makePartialPublicPost(publicPost),
         errors: [],
     };
     const [state, action, isPending] = useActionState(
-        createPostAction,
+        actionsMap[mode],
         initialState
     );
 
@@ -30,6 +51,13 @@ export function ManagePostForm({ publicPost }: ManagePostFormProps) {
             state.errors.forEach((error) => toast.error(error));
         }
     }, [state.errors]);
+
+    useEffect(() => {
+        if (state.success) {
+            toast.dismiss();
+            toast.success("Post updated!");
+        }
+    }, [state.success]);
 
     const { formState } = state;
     const [contentValue, setContentValue] = useState(publicPost?.content || "");
@@ -42,6 +70,7 @@ export function ManagePostForm({ publicPost }: ManagePostFormProps) {
                     placeholder="ID generated automatically"
                     type="text"
                     defaultValue={formState.id}
+                    disabled={isPending}
                     readOnly
                 />
                 <InputText
@@ -50,6 +79,7 @@ export function ManagePostForm({ publicPost }: ManagePostFormProps) {
                     placeholder="Slug generated automatically"
                     type="text"
                     defaultValue={formState.slug}
+                    disabled={isPending}
                     readOnly
                 />
                 <InputText
@@ -58,6 +88,7 @@ export function ManagePostForm({ publicPost }: ManagePostFormProps) {
                     placeholder="Enter the author's name"
                     type="text"
                     defaultValue={formState.author}
+                    disabled={isPending}
                 />
                 <InputText
                     labelText="Title"
@@ -65,6 +96,7 @@ export function ManagePostForm({ publicPost }: ManagePostFormProps) {
                     placeholder="Your post title"
                     type="text"
                     defaultValue={formState.title}
+                    disabled={isPending}
                 />
                 <InputText
                     labelText="Excerpt"
@@ -72,13 +104,14 @@ export function ManagePostForm({ publicPost }: ManagePostFormProps) {
                     placeholder="Enter excerpt"
                     type="text"
                     defaultValue={formState.excerpt}
+                    disabled={isPending}
                 />
                 <MarkdownEditor
                     labelText="Content"
                     value={contentValue}
                     setValue={setContentValue}
                     textAreaName="content"
-                    disabled={false}
+                    disabled={isPending}
                 />
 
                 <ImageUploader />
@@ -89,6 +122,7 @@ export function ManagePostForm({ publicPost }: ManagePostFormProps) {
                     placeholder="Enter the image URL"
                     type="text"
                     defaultValue={formState.coverImageUrl}
+                    disabled={isPending}
                 />
 
                 <InputCheckBox
@@ -96,6 +130,7 @@ export function ManagePostForm({ publicPost }: ManagePostFormProps) {
                     name="published"
                     type="checkbox"
                     defaultChecked={formState.published}
+                    disabled={isPending}
                 />
 
                 <div className="mt-4">
