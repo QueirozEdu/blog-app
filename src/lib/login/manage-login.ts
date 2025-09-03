@@ -67,7 +67,7 @@ export async function requireLoginSessionOrRedirect() {
     const isAuthenticated = await verifyLoginSession();
 
     if (!isAuthenticated) {
-        redirect("admin/login");
+        redirect("/admin/login");
     }
 }
 export async function signJwt(jwtPayload: JwtPayload) {
