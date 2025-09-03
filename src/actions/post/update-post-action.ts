@@ -5,6 +5,7 @@ import {
     makePublicPostFromDb,
     PublicPost,
 } from "@/DTO/post/dto";
+import { verifyLoginSession } from "@/lib/login/manage-login";
 import { PostUpdateSchema } from "@/lib/post/validations";
 import { postRepository } from "@/repositories/post";
 import { getZodErrorMessages } from "@/utils/get-zod-error-messages";
@@ -22,7 +23,7 @@ export async function updatePostAction(
     prevState: UpdatePostActionState,
     formData: FormData
 ): Promise<UpdatePostActionState> {
-    // TODO: verify if user is logged
+    const isAuthenticated = await verifyLoginSession();
 
     if (!(formData instanceof FormData)) {
         return {
@@ -42,6 +43,13 @@ export async function updatePostAction(
 
     const formDataToObj = Object.fromEntries(formData.entries());
     const zodParsedObj = PostUpdateSchema.safeParse(formDataToObj);
+
+    if (!isAuthenticated) {
+        return {
+            formState: makePartialPublicPost(formDataToObj),
+            errors: ["Please log in again in another tab to continue"],
+        };
+    }
 
     if (!zodParsedObj.success) {
         const errors = getZodErrorMessages(zodParsedObj.error.format());

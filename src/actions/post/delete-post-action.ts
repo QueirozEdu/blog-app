@@ -1,12 +1,19 @@
 "use server";
 import { drizzleDb } from "@/db/drizzle";
 import { postsTable } from "@/db/drizzle/schemas";
+import { verifyLoginSession } from "@/lib/login/manage-login";
 import { postRepository } from "@/repositories/post";
 import { eq } from "drizzle-orm";
 import { revalidateTag } from "next/cache";
 
 export async function deletePostAction(id: string) {
-    //TODO: check user login
+    const isAuthenticated = await verifyLoginSession();
+
+    if (!isAuthenticated) {
+        return {
+            errors: ["Please log in again in another tab to continue"],
+        };
+    }
 
     if (!id || typeof id !== "string") {
         return {
